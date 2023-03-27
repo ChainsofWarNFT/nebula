@@ -4,12 +4,22 @@
   <p align="center">A Cardano NFT marketplace contract including chain indexer and event listener for individual projects.</p>
 </p>
 
-⚠️ The contract hasn't been thoroughly tested yet. Use the contract at your own risk. Changes/improvements will still happen. Changes can also be breaking.
-
 ## Requirements
 
 - [Deno](https://deno.land/) $\ge$ Version 1.28.3
-- [Aiken](https://github.com/aiken-lang/aiken.git) (`cargo install --git https://github.com/aiken-lang/aiken.git --rev f230af436c82272d3a896690b060a64c49f1b84b`)
+- [Aiken](https://github.com/aiken-lang/aiken.git) (`cargo install --git https://github.com/aiken-lang/aiken.git --rev ae981403c67adf6399695c0832e854865c621fcb`)
+
+## Installation (Contract)
+
+### Deno
+```js
+import { Contract } from "https://deno.land/x/nebula@1.0.1/mod.ts";
+```
+
+### NPM
+```
+npm install @spacebudz/nebula
+```
 
 ## Quick start
 
@@ -17,8 +27,8 @@
 **Note**: The ideal way to handle the royalty token is to have it under the same `policy id` as the collection. This will make the authentication process smoother and more efficient. However, Nebula allows for specifying a different `policy id` if necessary. If you have a royalty token already you can skip the step of the royalty token creation.
 
 ```ts
-import { Contract } from "https://deno.land/x/nebula@0.1.3/contract/mod.ts"
-import { Lucid, Blockfrost } from "https://deno.land/x/lucid@0.9.4/mod.ts"
+import { Contract } from "https://deno.land/x/nebula@1.0.1/contract/mod.ts"
+import { Lucid, Blockfrost } from "https://deno.land/x/lucid@0.9.7/mod.ts"
 
 const lucid = await Lucid.new(
   new Blockfrost(
@@ -141,7 +151,7 @@ import {
   Config,
   MarketplaceEvent,
   SaleEventData,
-} from "https://deno.land/x/nebula@0.1.3/watcher/src/types.ts";
+} from "https://deno.land/x/nebula@1.0.1/watcher/src/types.ts";
 
 
 /** 
@@ -249,7 +259,7 @@ export function onChange() {
 2. Start the watcher:
 
 ```
-deno run -A https://deno.land/x/nebula@0.1.3/watcher/mod.ts --ogmios-url ws://localhost:1337 --database ./marketplace.sqlite --config ./config.ts
+deno run -A https://deno.land/x/nebula@1.0.1/watcher/mod.ts --ogmios-url ws://localhost:1337 --database ./marketplace.sqlite --config ./config.ts
 ```
 
 <img width="100%" src="./assets/watcher.png" align="center"/>
@@ -259,7 +269,7 @@ deno run -A https://deno.land/x/nebula@0.1.3/watcher/mod.ts --ogmios-url ws://lo
 Run the querier: 
 
 ```
-deno run -A https://deno.land/x/nebula@0.1.3/watcher/querier.ts --database ./marketplace.sqlite
+deno run -A https://deno.land/x/nebula@1.0.1/watcher/querier.ts --database ./marketplace.sqlite
 ```
 
 Runs on port `3000` by default. It hosts the database and allows you to make simple queries. The API will likely be extended and improved over time.
@@ -356,5 +366,3 @@ Nebula charges by default a protocol fee for each sale, which is currently about
 ## Todo
 
 - [ ] Improve and extend documentation.
-- [ ] Make the Nebula contract also available on NPM as official package.
-
